@@ -6,20 +6,20 @@ import numpy as np
 from Bio.PDB import PDBParser
 import os
 import platform
-
-# ------------------------------
-# 🧠 CNN Model Definition
-# ------------------------------
 import torch.nn as nn
+
+################
+# Init program #
+################
 
 print( """
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀ ⠀⠀⠀ ⠀⢀⣠⡤⠶⠖⠒⠶⠤⣄⡀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀  ⠀  ⠀⠀⠀⢀⡰⠞⢉⢀⠀⡀⡀⡀   ⠀⠈⠓⢤⡀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀ ⠀⠀⠀ ⠀⠀⣠⠎⠀⣠⡠⢋⣬⠊⢄⠑⢀⠀⠀⠄⢀  ⠀⡹⣄⠀⠀ 
-⠀⠀⠀⠀⠀⠀ ⠀ ⠀⠀ ⢰⠃⣠⣿⠟⠓⢙⣋⡓⠑⠐⢌⠎⠞⠲⠀ ⢤⣿⣿⡆⠀
-⠀⠀⠀⠀ ⠀ ⠀    ⠛⢁⣴⣶⣿⣶⣼⡖⠀⢁⣀⣦⣴⣿⣿⣿⣿⡀           Pockétmon has started running! 
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠠⣷⣯⣿⣷⣿⢏⡴⡢⣌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃         Let's catch some pockets!
+⠀⠀⠀⠀⠀⠀ ⠀ ⠀⠀ ⢰⠃⣠⣿⠟⠓⢙⣋⡓⠑⠐⢌⠎⠞⠲⠀ ⢤⣿⣿⡆⠀       ░▒▓█▇▆▅▃▂▁  P O C K É T M O N  ▁▁▂▃▅▆▇█▓▒░
+⠀⠀⠀⠀ ⠀ ⠀    ⠛⢁⣴⣶⣿⣶⣼⡖⠀⢁⣀⣦⣴⣿⣿⣿⣿⡀                  Pockétmon has started running! 
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠠⣷⣯⣿⣷⣿⢏⡴⡢⣌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃                Let's catch some pockets!
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⡟⠛⠿⠿⣿⡘⣄⢀⣼⢠⣿⣿⣿⣿⡿⠿⠿⠿⠛⢻⠆
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣻⡀⠀⠀⠘⠿⣦⣯⣴⡿⠋⠀⠀⠀⠀ ⠀⠀⠀⠀⣞⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠱⣷⡀⠀⠀⠀⠀⠐⠂⠁⠀⠀⠀⠀⠀ ⠀⠀⢀⡾⠀⠀
@@ -27,6 +27,10 @@ print( """
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢷⠦⢄⣀⣀⣀⣀⣠⠴⠚⠉⠀⠀⠀⠀⠀
 
 """)
+
+######################## 
+# CNN Model Definition #
+########################
 
 class Pocket3DCNN(nn.Module):
     def __init__(self, in_channels=4):
@@ -51,9 +55,10 @@ class Pocket3DCNN(nn.Module):
     def forward(self, x):
         return self.model(x)
 
-# ------------------------------
-# 🧊 Voxelization Function
-# ------------------------------
+#########################
+# Voxelization Function #
+#########################
+
 def voxelize_structure(pdb_path, origin=None, grid_size=32, voxel_size=1.0, channels=['C', 'N', 'O', 'S'], return_origin=False):
     parser = PDBParser(QUIET=True)
     structure = parser.get_structure("structure", pdb_path)
@@ -76,9 +81,10 @@ def voxelize_structure(pdb_path, origin=None, grid_size=32, voxel_size=1.0, chan
 
     return (grid, origin) if return_origin else grid
 
-# ------------------------------
-# 💾 Save Output to PDB
-# ------------------------------
+######################
+# Save Output to PDB # 
+######################
+
 def save_predicted_pocket_to_pdb(pred_grid, origin, voxel_size, pdb_filename, threshold=0.5):
     if torch.is_tensor(pred_grid):
         pred_grid = pred_grid.squeeze().detach().cpu().numpy()
@@ -97,26 +103,35 @@ def save_predicted_pocket_to_pdb(pred_grid, origin, voxel_size, pdb_filename, th
                         atom_index += 1
         f.write("END\n")
 
-# ------------------------------
-# 🖥️ CLI + Inference Logic
-# ------------------------------
-def main():
+#########################
+# CLI + Inference Logic #
+#########################
 
-    parser = argparse.ArgumentParser(description="Predict binding pockets from protein PDB file using 3D CNN.")
+
+def main():
+    parser = argparse.ArgumentParser(
+        prog='pocketmon',
+        description=" ☞ Predict protein binding pockets using a 3D CNN ",
+        epilog="Example:\n  pocketmon --input protein.pdb --model best_model.pt --output pocket.pdb",
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+
     parser.add_argument('--input', required=True, help="Path to input protein PDB file")
-    parser.add_argument('--model', default='best_model.pt', help="Path to trained PyTorch model weights")
-    parser.add_argument('--output', default='predicted_pocket.pdb', help="Output PDB filename for predicted pocket")
+    parser.add_argument('--model', default='best_model.pt', help="Path to trained model weights (.pt)")
+    parser.add_argument('--output', default='predicted_pocket.pdb', help="Output filename for predicted pocket PDB")
+
     args = parser.parse_args()
 
     # Smart device detection
+
     if torch.backends.mps.is_available() and platform.system() == "Darwin":
-        print("⚠️ MPS is available (Apple GPU), but Conv3D is NOT supported — using CPU instead.")
+        print(" ▲ MPS is available (Apple GPU), but Conv3D is NOT supported — using CPU instead.")
         device = torch.device("cpu")
     elif torch.cuda.is_available():
-        print("✅ CUDA is available — using GPU")
+        print(" ✓ CUDA is available — using GPU")
         device = torch.device("cuda")
     else:
-        print("⚠️ No GPU available — using CPU")
+        print(" ▲ No GPU available — using CPU")
         device = torch.device("cpu")
 
     # Load model
@@ -127,7 +142,7 @@ def main():
 
     # Preprocess input
     protein_grid, origin = voxelize_structure(args.input, return_origin=True)
-    X = torch.tensor(protein_grid, dtype=torch.float32).unsqueeze(0).to(device)  # (1, C, D, H, W)
+    X = torch.tensor(protein_grid, dtype=torch.float32).unsqueeze(0).to(device)
 
     # Run prediction
     with torch.no_grad():
@@ -136,7 +151,7 @@ def main():
 
     # Save predicted mask to PDB
     save_predicted_pocket_to_pdb(pred_mask, origin, voxel_size=1.0, pdb_filename=args.output)
-    print(f"✅ Prediction saved to: {args.output}")
+    print(f" ✓ Prediction saved to: {args.output}")
 
 if __name__ == "__main__":
     main()

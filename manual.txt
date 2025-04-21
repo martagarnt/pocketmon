@@ -1,0 +1,14 @@
+ ____   ___   ____ _  __ _____ _____ __  __  ___  _   _ 
+|  _ \ / _ \ / ___| |/ /| ____|_   _|  \/  |/ _ \| \ | |
+| |_/ | | | | |   | ' / |  _|   | | | |\/| | | | |  \| |
+|  __/| |_| | |___| . \ | |___  | | | |  | | |_| | |\  |
+|_|    \___/ \____|_|\_\|_____| |_| |_|  |_|\___/|_| \_|
+
+        ░▒▓█▇▆▅▃▂▁  P O C K É T M O N  ▁▁▂▃▅▆▇█▓▒░
+
+Pockétmon is a command-line tool and 3D Convolutional Neural Network that predicts ligand-binding pockets in protein structures from PDB files.
+
+Pockétmon can be used with the following command: 
+
+pocketmon --input 2ay2.pdb --model best_model.pt --output predicted_pocket.pdb
+
