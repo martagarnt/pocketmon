@@ -43,7 +43,7 @@ conda create -n pocketmon-env python=3.10
 conda activate pocketmon-env
 ```
 
-#### 2.2 Create a regular virtual environment
+#### 2.2. Create a regular virtual environment
 In the case you have Python 3.10, no Conda environment needs to be created; just make sure the version is specified when calling python commands (in case you have serveral versions downloaded).
 
 ```bash
