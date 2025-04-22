@@ -12,6 +12,12 @@
 
 Pockétmon is a command-line tool and 3D Convolutional Neural Network that predicts ligand-binding pockets in protein structures from PDB files.
 
+[Biblographic Research](bibliographic_research_pocketmon.docx)
+
+[Manual](manual.txt)
+
+[Documentation](documentation_pocketmon.docx)
+
 ---
 
 ## Installation 
