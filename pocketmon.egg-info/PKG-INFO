@@ -1,17 +1,6 @@
-Metadata-Version: 2.4
+Metadata-Version: 2.1
 Name: pocketmon
 Version: 1.0
 Summary: Pockétmon: CNN-based tool for binding pocket prediction
 Home-page: https://github.com/martagarnt/pocketmon
 Author: Marta García, Karim Hamed, Ivon Sánchez
-Requires-Dist: biopython==1.83
-Requires-Dist: numpy==1.24.4
-Requires-Dist: requests==2.31.0
-Requires-Dist: scipy==1.13.0
-Requires-Dist: matplotlib==3.8.0
-Requires-Dist: scikit-learn==1.3.0
-Requires-Dist: torch==2.2.0
-Dynamic: author
-Dynamic: home-page
-Dynamic: requires-dist
-Dynamic: summary

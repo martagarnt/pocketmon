@@ -14,7 +14,7 @@ Pockétmon is a command-line tool and 3D Convolutional Neural Network that predi
 
 ---
 
-## Installation
+## Installation 
 
 > **Recommended**: Use a Python 3.10 environment for best compatibility.
 
@@ -25,6 +25,19 @@ cd pocketmon
 ```
 
 ### 2. Create a virtual environment
+If you're using Python 3.12+, you might encounter errors since some dependencies are not yet compatible with the latest Python versions.
+In that case, we suggest creating a clean Python 3.10 environment using Conda:
+
+#### 2.1. Create a virtual environment using Conda:
+
+```bash
+conda create -n pocketmon-env python=3.10
+conda activate pocketmon-env
+```
+
+### 2.2 Create a regular virtual environment
+In the case you have Python 3.10, no Conda environment needs to be created; just make sure the version is specified when calling python commands (in case you have serveral versions downloaded).
+
 ```bash
 python3.10 -m venv venv
 source venv/bin/activate
@@ -46,7 +59,7 @@ pip install .
 ## Verifying Installation
 To test if the installation was successful, run:
 ```bash
-python -c "from pocketmon import predict; predict.print_banner('install'); print('✓ Pockétmon installed successfully and ready to catch some pockets!')"
+python3.10 -c "from pocketmon import predict; predict.print_banner('install'); print('✓ Pockétmon installed successfully and ready to catch some pockets!')"
 ```
 
 ---
