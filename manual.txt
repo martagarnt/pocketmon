@@ -49,5 +49,5 @@ Example usage:
 Contact:
 For questions or support, please contact:
 - Marta García  ·  marta.garcia38@estudiant.upf.edu
-- Karim Hamed   ·  karim.hamed@estudiant.upf.edu
-- Ivon Sánchez  ·  ivon.sanchez@estudiant.upf.edu
+- Karim Hamed   ·  karim.hamed01@estudiant.upf.edu
+- Ivon Sánchez  ·  ivon.sanchez01@estudiant.upf.edu
