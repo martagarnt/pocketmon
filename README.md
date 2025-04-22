@@ -114,5 +114,5 @@ pocketmon -v --input 2ay2.pdb --model best_model_refined.pt --output result --tr
 ## Contact
 For questions or support:
 - Marta García · marta.garcia38@estudiant.upf.edu
-- Karim Hamed  · karim.hamed@estudiant.upf.edu
-- Ivon Sánchez · ivon.sanchez@estudiant.upf.edu
+- Karim Hamed  · karim.hamed01@estudiant.upf.edu
+- Ivon Sánchez · ivon.sanchez01@estudiant.upf.edu
