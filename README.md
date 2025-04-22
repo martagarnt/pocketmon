@@ -59,7 +59,7 @@ pip install .
 ## Verifying Installation
 To test if the installation was successful, run:
 ```bash
-python3.10 -c "from pocketmon import predict; predict.print_banner('install'); print('✓ Pockétmon installed successfully and ready to catch some pockets!')"
+python3.10 -c "from pocketmon import predict; predict.print_banner('install'); print('✓ Pockétmon installed successfully and ready to catch some pockets\!')"
 ```
 
 ---
