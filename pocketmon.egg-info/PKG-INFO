@@ -1,8 +1,8 @@
 Metadata-Version: 2.4
 Name: pocketmon
-Version: 1.0.0
-Summary: Pockétmon: Predict protein binding pockets using 3D CNNs!
-Home-page: https://github.com/yourusername/pocketmon
+Version: 1.0
+Summary: Pockétmon: CNN-based tool for binding pocket prediction
+Home-page: https://github.com/martagarnt/pocketmon
 Author: Marta García, Karim Hamed, Ivon Sánchez
 Requires-Dist: biopython==1.83
 Requires-Dist: numpy==1.24.4

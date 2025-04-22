@@ -4,11 +4,50 @@
 |  __/| |_| | |___| . \ | |___  | | | |  | | |_| | |\  |
 |_|    \___/ \____|_|\_\|_____| |_| |_|  |_|\___/|_| \_|
 
-        ░▒▓█▇▆▅▃▂▁  P O C K É T M O N  ▁▁▂▃▅▆▇█▓▒░
+     ░▒▓█▇▆▅▃▂▁  P O C K É T M O N  ▁▁▂▃▅▆▇█▓▒░
 
 Pockétmon is a command-line tool and 3D Convolutional Neural Network that predicts ligand-binding pockets in protein structures from PDB files.
 
-Pockétmon can be used with the following command: 
+Usage:
+  pocketmon [options] --input <pdb_file_path>
 
-pocketmon --input 2ay2.pdb --model best_model.pt --output predicted_pocket.pdb
+Options:
+  --model <model_path>       Path to the trained model weights (.pt file) [default: best_model_refined.pt]
+  --output <output_basename> Base name for output files [default: predicted_pocket]
+  --trust <float>            Trust threshold for voxel classification (0.0–1.0) [default: 0.5]
+  -v, --verbose              Enable verbose output
+  -h, --help                 Show this help message and exit
 
+Arguments:
+  --input <pdb_file_path>    Path to the input PDB file (required)
+
+Output:
+  - Prints log messages to console if verbose mode is enabled
+  - Saves the predicted pocket as voxel pseudo-atoms in a PDB file:
+      <output_basename>_predicted_pocket.pdb
+  - Saves predicted binding residues in:
+      <output_basename>_predicted_residues.txt
+    Format:
+      RESNAME RESID CHAIN
+      Example:
+        LEU 6 A
+        ASN 8 A
+        LYS 10 A
+
+About the Trust Threshold:
+  The trust threshold determines how confident the model must be before classifying a voxel as part of a binding pocket.
+  - A lower value (e.g. 0.3) will result in more voxels being considered part of the pocket, potentially increasing recall.
+  - A higher value (e.g. 0.8) will yield fewer predictions, focusing only on the most confident ones (higher precision).
+  - The default value (0.5) balances both aspects.
+
+For dependencies and setup information please read README.md.
+
+Example usage:
+  pocketmon --input myprotein.pdb
+  pocketmon -v --input 2ay2.pdb --model best_model.pt --output result --trust 0.6
+
+Contact:
+For questions or support, please contact:
+- Marta García  ·  marta.garcia38@estudiant.upf.edu
+- Karim Hamed   ·  karim.hamed@estudiant.upf.edu
+- Ivon Sánchez  ·  ivon.sanchez@estudiant.upf.edu

@@ -1,8 +1,21 @@
 from setuptools import setup, find_packages
+from setuptools.command.install import install
+
+def print_install_banner():
+    try:
+        from pocketmon.predict import print_banner
+        print_banner(mode="install")
+    except Exception:
+        print("\n Pockétmon installed! Run `pocketmon -h` to get started.\n")
+
+class CustomInstallCommand(install):
+    def run(self):
+        install.run(self)
+        print_install_banner()
 
 setup(
     name='pocketmon',
-    version='1.0.0',
+    version='1.0',
     packages=find_packages(),
     install_requires=[
         'biopython==1.83',
@@ -15,28 +28,11 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-        'pocketmon=pocketmon.predict:main'
-        ]
+            'pocketmon=pocketmon.predict:main',
+        ],
     },
+    cmdclass={'install': CustomInstallCommand},
     author='Marta García, Karim Hamed, Ivon Sánchez',
-    description='Pockétmon: Predict protein binding pockets using 3D CNNs!',
-    url='https://github.com/martagarnt/pocketmon'
+    description='Pockétmon: CNN-based tool for binding pocket prediction',
+    url='https://github.com/martagarnt/pocketmon',
 )
-
-if setup is not None:
-    print("""⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⡤⠶⠖⠒⠶⠤⣄⡀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡰⠞⢉⢀⠀⡀⡀⡀⠀⠀⠀⠈⠓⢤⡀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠎⠀⣠⡠⢋⣬⠊⢄⠑⢀⠀⠀⠄⢀⠀⡹⣄⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⠃⣠⣿⠟⠓⢙⣋⡓⠑⠐⢌⠎⠞⠲⠀⢤⣿⣿⡆⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡏⡀⡟⠛⢁⣴⣶⣿⣶⣼⡖⠀⢁⣀⣦⣴⣿⣿⣿⣿⡀            Setup installed successfully! 
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠠⣷⣯⣿⣷⣿⢏⡴⡢⣌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃              ^^  Enjoy Pockétmon  ^^
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠑⡟⠛⠿⠿⣿⡘⣄⢀⣼⢠⣿⣿⣿⣿⡿⠿⠿⠿⠛⢻⠆           May you catch a lot of pockets!
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣻⡀⠀⠀⠘⠿⣦⣯⣴⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⣞⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠱⣷⡀⠀⠀⠀⠀⠐⠂⠁⠀⠀⠀⠀⠀⠀⠀⢀⡾⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⢿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠋⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠻⢷⠦⢄⣀⣀⣀⣀⣠⠴⠚⠉⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠐⠐⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-""")
-else:
-    print(f"An error occurred during installation.")
