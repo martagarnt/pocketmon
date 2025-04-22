@@ -18,6 +18,7 @@ Pockétmon is a command-line tool and 3D Convolutional Neural Network that predi
 
 [Documentation](documentation_pocketmon.docx)
 
+[Examples](Examples.pdf)
 ---
 
 ## Installation 
