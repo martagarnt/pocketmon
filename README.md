@@ -106,7 +106,7 @@ Tune this parameter to your needs using `--trust`.
 ## Example Usage
 ```bash
 pocketmon --input myprotein.pdb
-pocketmon -v --input 2ay2.pdb --model best_model.pt --output result --trust 0.6
+pocketmon -v --input 2ay2.pdb --model best_model_refined.pt --output result --trust 0.6
 ```
 
 ---
